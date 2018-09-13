@@ -1,0 +1,10 @@
+<?php
+extract($commonVariables);
+
+$this->headScript()->appendFile($this->basePath('/cms/js/collection.js', 'text/javascript'));
+?>
+<tr><td width="20%" align="right">
+    <?= $collection->getLabel() ?>
+</td><td valign="top">
+    <?= $this->partial($formCollectionContent, compact('collection', 'commonVariables')) ?>
+</td></tr>

@@ -1,0 +1,30 @@
+<?php
+$resource    = $provider->getResourceName();
+$route       = $provider->getRoute();
+$viewRoute   = $route . '/view';
+$editRoute   = $route . '/edit';
+$deleteRoute = $route . '/delete';
+$params      = ['id' => $id];
+?>
+
+<?php if($adminCoreService->isAllowed($resource, 'view')): ?>
+<a class="btn btn-xs btn-info"
+   href="<?= $this->url($viewRoute, $params, $routeOptions) ?>">
+    <i class="glyphicon glyphicon-eye-open"></i> Ver
+</a>
+<?php endif ?>
+
+<?php if($adminCoreService->isAllowed($resource, 'edit')): ?>
+<a class="btn btn-xs btn-warning"
+   href="<?= $this->url($editRoute, $params, $routeOptions) ?>">
+    <i class="glyphicon glyphicon-pencil"></i> Editar
+</a>
+<?php endif ?>
+
+<?php if($adminCoreService->isAllowed($resource, 'delete')): ?>
+<a class="btn btn-xs btn-danger"
+   data-modal="#modal-confirm"
+   data-target="<?= $this->url($deleteRoute, $params, $routeOptions) ?>">
+    <i class="glyphicon glyphicon-remove"></i> Borrar
+</a>
+<?php endif ?>

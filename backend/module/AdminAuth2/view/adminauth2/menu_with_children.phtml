@@ -1,0 +1,14 @@
+<?php
+$selected         = $adminCoreService->isCurrentMenu($id);
+$menu['selected'] = $selected;
+?>
+<li<?= ($selected ? ' class="open active"' : '') ?>>
+<?= $this->partial('adminauth2/menu_entry', $menu) ?>
+
+<?= $this->partial('adminauth2/menu_entry_open', ['section' => $id, 'open' => $menu['selected']]) ?>
+    <?php foreach ($menu['children'] as $id => $child): ?>
+    <?php $child['selected'] = $adminCoreService->isCurrentMenu($id) ?>
+    <?= $this->partial('adminauth2/menu_entry_child', $child) ?>
+    <?php endforeach ?>
+<?= $this->partial('adminauth2/menu_entry_close') ?>
+</li>

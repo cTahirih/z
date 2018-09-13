@@ -1,0 +1,49 @@
+<?php
+if (!isset($routeParams)) {
+    $routeParams = [];
+}
+if (!isset($routeOptions)) {
+    $routeOptions = [];
+}
+
+$url = $this->url($route, $routeParams, $routeOptions);
+
+?>
+
+<?php if ($pageCount): ?>
+<div class="pagination pagination-centered">
+    <?php
+    if (isset($previous)):
+        $routeOptions['query']['page'] = $previous;
+        $url = $this->url($route, $routeParams, $routeOptions);
+    ?>
+    <li><a href="<?= $url ?>">&lt;&lt;</a></li>
+    <?php else: ?>
+    <li class="disabled"><a href="#">&lt;&lt;</a></li>
+    <?php endif ?>
+    
+    <?php
+    foreach ($pagesInRange as $page):
+        if ($page != $current):
+            $routeOptions['query']['page'] = $page;
+            $url = $this->url($route, $routeParams, $routeOptions);
+    ?>
+    <li><a href="<?= $url ?>"><?= $page ?></a></li>
+    <?php else: ?>
+    <li class="active"><a href="#" onclick="return false;"><?= $page ?></a></li>
+    <?php
+        endif;
+    endforeach;
+    ?>
+    
+    <?php
+    if (isset($next)):
+        $routeOptions['query']['page'] = $next;
+        $url = $this->url($route, $routeParams, $routeOptions);
+    ?>
+    <li><a href="<?= $url ?>">&gt;&gt;</a></li>
+    <?php else: ?>
+    <li class="disabled"><a href="#">&gt;&gt;</a></li>
+    <?php endif ?>
+</div>
+<?php endif ?>

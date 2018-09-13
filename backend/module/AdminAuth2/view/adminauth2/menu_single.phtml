@@ -1,0 +1,7 @@
+<?php
+$selected         = $adminCoreService->isCurrentMenu($id);
+$menu['selected'] = $selected;
+?>
+<li<?= ($selected ? ' class="open active"' : '') ?>>
+<?= $this->partial('adminauth2/menu_entry', $menu) ?>
+</li>

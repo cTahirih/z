@@ -1,0 +1,28 @@
+<?php
+$selected     = (isset($selected) && $selected);
+$menuSelected = ($selected ? ' menu-selected' : '');
+
+if (isset($url) && !is_null($url)) {
+    $url = $this->routeOrString($url);
+} else {
+    $url = 'javascript:;';
+}
+?>
+<a href="<?= $url ?>" class="detailed<?= $menuSelected ?>">
+    <?php if (isset($children)): ?>
+    <span class="arrow<?= ($selected ? ' open active' : '') ?>"></span>
+    <?php endif ?>
+    <span class="title"><?= $title ?></span>
+    <?php if (isset($description)): ?>
+    <span class="details"><?= $description ?></span>
+    <?php endif ?>
+</a>
+
+<span class="icon-thumbnail">
+    <?php if (isset($iconClass)): ?>
+    <i class="<?= $iconClass ?><?= $menuSelected ?>"></i>
+    <?php endif ?>
+    <?php if (isset($iconLetter)): ?>
+    <span class="<?= trim($menuSelected) ?>"><?= $iconLetter ?></span>
+    <?php endif ?>
+</span>

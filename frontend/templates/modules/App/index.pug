@@ -1,0 +1,307 @@
+extend ../../_layout
+
+prepend html
+  - custom.title = 'Dolce Gusto'
+  - custom.body_cls = 'body--home';
+
+block main
+    nav.navbar.navbar-light.py-0.my-3
+      a.navbar-brand.font-weight-light(href="#")
+        img(src!=config.static_url('images/logo.png')).d-inline-block.align-top.pr-3
+        | Plataforma KPIs
+      a.btn.bt-outline.gotham-bold(href="/", role="button")
+        | Cerrar sesión
+
+
+    main.container-fluid#app
+      //- .btn.bt-outline.gotham-bold(@click="parseData")
+      //-   | parseData
+      .row
+        .navleft.col-2.p-0.mt-5
+          ul.list-group.mt-5.mb-5.text-center
+            li
+              a.gotham-bold.b-nav-tab.list-group-item.list-group-item-action.firsttab.d-flex.align-items-center.justify-content-center(@click="tab = 'first', filtertabCapsules = 'total', getDataCapsulesTotal()", href="#", :class="[tab == 'first' ? 'active' : '']")
+                | Cápsulas
+            li
+              a.gotham-bold.b-nav-tab.list-group-item.list-group-item-action.d-flex.align-items-center.justify-content-center(href="#", @click="tab = 'second', filtertabClaims = 'total', getDataClaimsTotal()", :class="[tab == 'second' ? 'active' : '']")
+                | Canjes
+            li
+              a.gotham-bold.b-nav-tab.list-group-item.list-group-item-action.d-flex.align-items-center.justify-content-center(href="#", @click="tab = 'third', filtertabMachines = 'total', getDataMachinesTotal()", :class="[tab == 'third' ? 'active' : '']")
+                | Máquinas
+        .datadashboard.col-10
+          .container-fluid.px-0(v-cloak)
+            .borderbox
+              .row.mt-3
+                span.pt-2.px-3.d-flex.align-items-center
+                  | Tipo de usuario:
+                .nav.col(v-if="tab == 'first'")
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabCapsules = 'total', getDataCapsulesTotal()", href="#", :class="[filtertabCapsules == 'total' ? 'active' : '']") Todos
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabCapsules = 'platino', urlDataCapsulesPlatinum()", href="#", :class="[filtertabCapsules == 'platino' ? 'active' : '']") Platino
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabCapsules = 'gold', urlDataCapsulesGold()", href="#", :class="[filtertabCapsules == 'gold' ? 'active' : '']") Oro
+                .nav.col(v-if="tab == 'second'")
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabClaims = 'total', getDataClaimsTotal()", href="#", :class="[filtertabClaims == 'total' ? 'active' : '']") Todos
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabClaims = 'platino', urlDataClaimsPlatinum()", href="#", :class="[filtertabClaims == 'platino' ? 'active' : '']") Platino
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabClaims = 'gold', urlDataClaimsGold()", href="#", :class="[filtertabClaims == 'gold' ? 'active' : '']") Oro
+                .nav.col(v-if="tab == 'third'")
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabMachines = 'total', getDataMachinesTotal()", href="#", :class="[filtertabMachines == 'total' ? 'active' : '']") Todos
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabMachines = 'platino', urlDataMachinesPlatinum()", href="#", :class="[filtertabMachines == 'platino' ? 'active' : '']") Platino
+                  a.b-nav-tab.nav-link.d-flex.align-items-center.text-xs.navitem.gotham-bold(@click="filtertabMachines = 'gold', urlDataMachinesGold()", href="#", :class="[filtertabMachines == 'gold' ? 'active' : '']") Oro
+                .col-4.mb-2.text-right
+                  a.btn.bt-sky.gotham-bold(:href="'/reports/capsules/capsules-quantity-by-month?start_month='+ start_date.month.value + '&start_year=' + start_date.year + '&end_month=' + end_date.month.value + '&end_year=' + end_date.year + '&export=1'",v-if="tab == 'first'", role="button")
+                    i.fas.fa-download.pr-1
+                    | Descargar reporte
+                  a.btn.bt-sky.gotham-bold(:href="'/reports/claims/claims-quantity-by-month?start_month='+ start_date.month.value + '&start_year=' + start_date.year + '&end_month=' + end_date.month.value + '&end_year=' + end_date.year + '&export=1'",v-if="tab == 'second'", role="button")
+                    i.fas.fa-download.pr-1
+                    | Descargar reporte
+                  a.btn.bt-sky.gotham-bold(:href="'/reports/machines/machines-quantity-by-month?start_month='+ start_date.month.value + '&start_year=' + start_date.year + '&end_month=' + end_date.month.value + '&end_year=' + end_date.year + '&export=1'",v-if="tab == 'third'", role="button")
+                    i.fas.fa-download.pr-1
+                    | Descargar reporte
+            .col-5.mt-3.mb-2.float-right
+              .row
+                .card
+                  .card-body
+                    p.card-subtitle.color-brown.m-0.lineheigth
+                      | Periodo analizado
+                    .container-fluid
+                      .row
+                        .form-group.col-4.mb-0.d-flex.align-items-center
+                          .container-monthpicker.row
+                            i.far.fa-calendar-alt.float-left.pt-1.color-brown
+                            input(type="text", placeholder="" v-model="start_date.month.month+ ' ' + start_date.year", @click="showCalendarStart = true, showCalendarEnd = false").gotham-bold.color-brown.p-0.form-control.monthpicker
+                          .calendar(v-show="showCalendarStart", v-cloak)
+                            .picker-container#monthpicker
+                              .row.m-0.title-header
+                                .col.py-2
+                                  select(name="year", v-model="start_date.year").title#yearpicker
+                                    option(value="Año", selected, disabled) Año
+                                    - for (var i = 2015; i < 2019 ; i++){
+                                      option(value!=i) !{i}
+                                    - };
+                                a(href="#", @click="showCalendarStart = false").float-right.pr-1
+                                  i.fas.fa-times.color-brown
+                              .body-picker
+                                //- button.elm-picker(v-for="elm in months", @click="start_date.month = elm, start_date.year != '' ? showCalendarStart = false : null", :class="[start_date.month == elm.value ? 'active' : '']")
+                                button.elm-picker(v-for="elm in months", @click="start_date.month = elm, start_date.year != '' ? showCalendarStart = false : null", :class="[start_date.month == elm.value ? 'active' : '']")
+                                  | {{elm.month}}
+                        .col-1.d-flex.align-items-center.justify-content-center
+                          i.fas.fa-arrow-right.color-icon
+                        .form-group.col-4.mb-0.d-flex.align-items-center
+                          .container-monthpicker.row
+                            i.far.fa-calendar-alt.float-left.pt-1.color-brown
+                            input(type="text", placeholder="" v-model="end_date.month.month + ' ' + end_date.year ", @click="showCalendarEnd = true, showCalendarStart = false").gotham-bold.color-brown.p-0.form-control.monthpicker
+                          .calendar(v-show="showCalendarEnd", v-cloak)
+                            .picker-container#monthpicker
+                              .row.m-0.title-header
+                                .col.py-2
+                                  select(name="year", v-model="end_date.year").title#yearpicker
+                                    option(value="Año", selected, disabled) Año
+                                    - for (var i = 2015; i < 2019 ; i++){
+                                      option(value!=i) !{i}
+                                    - };
+                                a(href="#", @click="showCalendarEnd = false").float-right.pr-1
+                                  i.fas.fa-times.color-brown
+                              .body-picker
+                                button.elm-picker(v-for="elm in months", @click="end_date.month = elm, end_date.year != '' ? showCalendarEnd = false : null", :class="[end_date.month == elm.value ? 'active' : '']")
+                                  | {{elm.month}}
+                        .col-2
+                          a(@click="getDataCapsulesTotal()", href="#", v-if="tab == 'first' && filtertabCapsules == 'total'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataCapsulesPlatinum()", href="#", v-if="tab == 'first' && filtertabCapsules == 'platino'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataCapsulesGold()", href="#", v-if="tab == 'first' && filtertabCapsules == 'gold'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="getDataClaimsTotal()", href="#", v-if="tab == 'second'  && filtertabClaims == 'total'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataClaimsPlatinum()", href="#", v-if="tab == 'second' && filtertabClaims == 'platino'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataClaimsGold()", href="#", v-if="tab == 'second' && filtertabClaims == 'gold'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="getDataMachinesTotal()", href="#", v-if="tab == 'third' && filtertabMachines == 'total'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataMachinesPlatinum()", href="#", v-if="tab == 'third' && filtertabMachines == 'platino'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                          a(@click="urlDataMachinesGold()", href="#", v-if="tab == 'third' && filtertabMachines == 'gold'").btn.bt-sky.bt-calendar.gotham-bold
+                            | Listo
+                .card.mt-1(v-show="filtertabCapsules !== 'total' && tab == 'first'", v-cloak)
+                  .card-body
+                    ul.pl-2
+                      li.color-brown.card-subtitle.lineheigth
+                        span.font-weigth-bold.gotham-bold
+                          | Cantidad total
+                        |   de unidades registradas:
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabCapsules == 'platino'")
+                          | {{capsules.platinum.quantityTotalByUser}} unidades
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | {{capsules.gold.quantityTotalByUser}} unidades
+                      li.color-brown.card-subtitle.mt-4.lineheigth
+                        span.gotham-bold
+                          | Cantidad promedio
+                        |  de unidades registradas por usuario:
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabCapsules == 'platino'")
+                          | {{capsules.platinum.averageByUser}} unidades
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | {{capsules.gold.averageByUser}} unidades
+                .card.mt-1(v-show="filtertabClaims !== 'total' && tab == 'second'", v-cloak)
+                  .card-body
+                    ul.pl-2
+                      li.color-brown.card-subtitle.lineheigth(v-if="claims.platinum.quantityTotalByUser < 2")
+                        span.font-weigth-bold.gotham-bold
+                          | Cantidad total
+                        |   de canjes realizados por usuario:
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabClaims == 'platino'")
+                          |  {{claims.platinum.quantityTotalByUser}} canje
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          |  {{claims.gold.quantityTotalByUser}} canje
+                      li.color-brown.card-subtitle.lineheigth(v-else)
+                        span.font-weigth-bold.gotham-bold
+                          | Cantidad total
+                        |   de canjes realizados por usuario:
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabClaims == 'platino'")
+                          |  {{claims.platinum.quantityTotalByUser}} canjes
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          |  {{claims.gold.quantityTotalByUser}} canjes
+                      li.color-brown.card-subtitle.mt-4.lineheigth
+                        span.gotham-bold
+                          | Cantidad promedio
+                        |  de canjes realizados por usuario:
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabClaims == 'platino'")
+                          |  {{claims.platinum.averageByUser}} canjes
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          |  {{claims.gold.averageByUser}} canjes
+                      li.color-brown.card-subtitle.mt-4.lineheigth
+                        span.gotham-bold
+                          | Frecuencia promedio
+                        |  de canjes por usuario:
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabClaims == 'platino'")
+                          | Cada {{claims.platinum.acquisitionAverage}} meses
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | Cada {{claims.gold.acquisitionAverage}} meses
+                .card.mt-1(v-show="filtertabMachines !== 'total' && tab == 'third'", v-cloak)
+                  .card-body
+                    ul.pl-2
+                      li.color-brown.card-subtitle.lineheigth(v-if="machines.platinum.quantityAverageByUser < 2")
+                        span.font-weigth-bold.gotham-bold
+                          | Cantidad
+                        |   promedio de máquinas por usuarios:
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabMachines == 'platino'")
+                          |  {{machines.platinum.quantityAverageByUser}} máquina
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          |  {{machines.gold.quantityAverageByUser}} máquina
+                      li.color-brown.card-subtitle.lineheigth(v-else)
+                        span.font-weigth-bold.gotham-bold
+                          | Cantidad
+                        |   promedio de máquinas por usuarios:
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabMachines == 'platino'")
+                          |  {{machines.platinum.quantityAverageByUser}} máquinas
+                        span.color-sky.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          |  {{machines.gold.quantityAverageByUser}} máquinas
+                      li.color-brown.card-subtitle.mt-4.lineheigth
+                        span.gotham-bold
+                          | Mes de mayor registro
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabMachines == 'platino'")
+                          | {{machines.platinum.bestMonth.month}} {{machines.platinum.bestMonth.year}}
+                        span.color-pink.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | {{machines.gold.bestMonth.month}} {{machines.gold.bestMonth.year}}
+                      li.color-brown.card-subtitle.mt-4.lineheigth(v-if="machines.platinum.frecuencieaverage < 2")
+                        span.gotham-bold
+                          | Frecuencia
+                        |  promedio de registro de máquinas:
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabMachines == 'platino'")
+                          | Cada mes
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | Cada mes
+                      li.color-brown.card-subtitle.mt-4.lineheigth(v-else)
+                        span.gotham-bold
+                          | Frecuencia
+                        |  promedio de registro de máquinas:
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-if="filtertabMachines == 'platino'")
+                          | Cada {{machines.platinum.frecuencieaverage}} meses
+                        span.color-orange.d-block.gotham-bold.lineheigth-md.text-md.mt-1(v-else)
+                          | Cada {{machines.gold.frecuencieaverage}} meses
+            .b-tab.mt-3(v-if="tab == 'first'", :class="[tab == 'first' ? 'active' : '']")
+              .b-tab(v-show="filtertabCapsules == 'total'", :class="[filtertabCapsules == 'total' ? 'active' : '']")#alluser
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.m-0
+                        span.gotham-bold
+                          | Cantidad total
+                        |   de unidades registradas por segmento:
+                      .my-5
+                        canvas#barChartCapsulas
+              .b-tab(v-show="filtertabCapsules == 'platino'", :class="[filtertabCapsules == 'platino' ? 'active' : '']")#platinouser
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Unidades registradas
+                      div.my-5
+                        canvas#lineChartCapsulasPlatino
+              .b-tab(v-show="filtertabCapsules == 'gold'", :class="[filtertabCapsules == 'gold' ? 'active' : '']")#golduser
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Unidades registradas
+                      .my-5
+                        canvas#lineChartCapsulasGold
+            .b-tab.mt-3(v-if="tab == 'second'", :class="[tab == 'second' ? 'active' : '']")
+              .b-tab(v-show="filtertabClaims == 'total'", :class="[filtertabClaims == 'total' ? 'active' : '']")#platinoalluser
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.m-0
+                        span.gotham-bold
+                          | Cantidad total
+                        |   de canjes registrados por segmento:
+                      .my-5
+                        canvas#barChartCanjes
+              .b-tab(v-show="filtertabClaims == 'platino'", :class="[filtertabClaims == 'platino' ? 'active' : '']")#platinousercanjes
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Canjes realizados:
+                      .my-5
+                        canvas#lineChartCanjesPlatino
+              .b-tab(v-show="filtertabClaims == 'gold'", :class="[filtertabClaims == 'gold' ? 'active' : '']")#goldusercanjes
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Promedio de canjes realizados
+                      .my-5
+                        canvas#lineChartCanjesGold
+            .b-tab.mt-3(v-if="tab == 'third'", :class="[tab == 'third' ? 'active' : '']")
+              .b-tab(v-show="filtertabMachines == 'total'", :class="[filtertabMachines == 'total' ? 'active' : '']")#allusermaq
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.m-0
+                        span.gotham-bold
+                          | Cantidad total
+                        |   de máquinas registradas por segmento:
+                      .my-5
+                        canvas#barChartMaquinas
+              .b-tab(v-show="filtertabMachines == 'platino'", :class="[filtertabMachines == 'platino' ? 'active' : '']")#platinousermaq
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Cantidad total de máquinas
+                      .my-5
+                        canvas#lineChartMaquinasPlatino
+              .b-tab(v-show="filtertabMachines == 'gold'", :class="[filtertabMachines == 'gold' ? 'active' : '']")#goldusermaq
+                .col-7.my-2.pl-0
+                  .card
+                    .card-body
+                      h5.card-title.color-brown.gotham-bold.m-0
+                        | Cantidad total de máquinas
+                      .my-5
+                        canvas#lineChartMaquinasGold
+
+
+block scripts
+  script(src!=config.static_url("scripts/home.js") async)
+
+block addons

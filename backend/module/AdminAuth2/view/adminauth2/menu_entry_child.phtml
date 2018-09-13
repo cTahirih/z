@@ -1,0 +1,12 @@
+<?php $menuSelected = (isset($selected) && $selected ? ' menu-selected' : '') ?>
+<li>
+    <a href="<?= $this->routeOrString($url) ?>" class="<?= $menuSelected ?>"><?= $title ?></a>
+    <span class="icon-thumbnail">
+        <?php if (isset($iconClass)): ?>
+        <i class="<?= $iconClass ?><?= $menuSelected ?>"></i>
+        <?php endif ?>
+        <?php if (isset($iconLetter)): ?>
+        <span class="<?= trim($menuSelected) ?>"><?= $iconLetter ?></span>
+        <?php endif ?>
+    </span>
+</li>

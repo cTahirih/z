@@ -1,0 +1,24 @@
+<?php
+/**
+ * Database Configuration
+ *
+ * INSTRUCTIONS:
+ *
+ * Copy this file without the ".dist" suffix and populate values as needed.
+ *
+ * READ THIS CAREFULLY:
+ *
+ * - The `.dist` file is part of the Git repository. DO NOT EDIT IT.
+ * - The file you'll copy (sans the ".dist" suffix) is by default ignored
+ *   by Git via .gitignore. This is a good practice as it prevents sensitive
+ *   credentials from being accidentally commited to the repository.
+ */
+
+return [
+    'type'    => 'mysql',
+    'host'     => '127.0.0.1',
+    'database' => '',
+    'username' => '',
+    'password' => '',
+    'port'     => 3306,
+];

@@ -1,0 +1,12 @@
+<?php
+extract($commonVariables);
+?>
+<table class="table table-striped table-bordered model-list">
+    <tr><td valign="top">
+        <?= $this->partial($formFieldsetRows, compact('fieldset', 'commonVariables')) ?>
+    </td><td valign="top">
+        &nbsp;
+    </td><td valign="top">
+        <a href="#" class="btn btn-danger" onClick="removeCollectionRow(this.parentNode.parentNode.parentNode); return false;">Remove</a>
+    </td></tr>
+</table>

@@ -1,0 +1,95 @@
+#MenuMobile
+  cursor pointer
+  width 30px //60
+  height 23px //45
+  position relative
+  margin 25px auto //50
+  transform rotate(0deg)
+  transition .5s ease-in-out
+  cursor pointer
+
+  span
+    display block
+    position absolute
+    height 1px //9px
+    width 100%
+    background _black
+    border-radius 1px //9px
+    opacity 1
+    left 0
+    transform rotate(0deg)
+    transition .25s ease-in-out
+
+    &:nth-child(1)
+      top 0px
+
+    &:nth-child(2)
+    &:nth-child(3)
+      top 9px //18px
+
+    &:nth-child(4)
+      top 18px //36px
+
+.is-menuOpened
+  #MenuMobile
+
+    span
+      background _white
+
+    span:nth-child(1)
+      top 9px //18px
+      width 0%
+      left 50%
+
+
+    span:nth-child(2)
+      transform rotate(45deg)
+
+    span:nth-child(3)
+      transform rotate(-45deg)
+
+    span:nth-child(4)
+      top 9px //18px
+      width 0%
+      left 50%
+
+.MenuWeb
+  overflow-y auto
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background _black
+  display none
+  text-transform uppercase
+  height 100vh
+  z-index 9999
+
+  .MenuWebContent
+    // position absolute
+    // top 50%
+    // left 50%
+    // transform translate(-50%, -50%)
+    overflow auto
+    width 100%
+    min-height 100vh
+    color _white
+    font-family _anton
+    font-size 58px
+    z-index 9999
+
+    .MenuWebContent-href
+    .MenuWebContent-link
+      display block
+      text-decoration none
+      color _white
+
+.is-menuOpened
+  overflow hidden
+  position relative
+  height 100%
+
+body.is-menuOpened
+  .MenuWeb
+    z-index 999

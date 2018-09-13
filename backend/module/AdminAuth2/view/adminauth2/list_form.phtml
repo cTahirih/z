@@ -1,0 +1,10 @@
+<?php
+$form = $provider->getListForm();
+echo $this->form()->openTag($form->prepare());
+?>
+<table class="table table-striped table-bordered model-list">
+    <tbody>
+        <?= $this->partial('form_fieldset_rows', ['fieldset' => $form]) ?>
+    </tbody>
+</table>
+</form>

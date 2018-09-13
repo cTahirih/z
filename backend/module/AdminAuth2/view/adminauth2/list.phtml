@@ -1,0 +1,39 @@
+<?php
+use AdminAuth2\Provider\ListWithFormProviderInterface;
+
+$this->headScript()->appendFile($this->basePath() . '/cms/js/bootstrap-confirm.js');
+
+$addRoute = $provider->getRoute() . '/add';
+$resource = $provider->getResourceName();
+
+if (!isset($tablePartial)) {
+    $tablePartial = 'adminauth2/list_table';
+}
+if (!isset($headerPartial)) {
+    $headerPartial = 'adminauth2/list_header';
+}
+if (!isset($rowPartial)) {
+    $rowPartial = 'adminauth2/list_row';
+}
+if (!isset($buttonsPartial)) {
+    $buttonsPartial = 'adminauth2/list_buttons';
+}
+
+$vars                   = $this->viewModel()->getCurrent()->getVariables();
+$vars['headerPartial']  = $headerPartial;
+$vars['rowPartial']     = $rowPartial;
+$vars['buttonsPartial'] = $buttonsPartial;
+?>
+<h1><?= $provider->getName(); ?></h1>
+
+<?php if ($provider instanceof ListWithFormProviderInterface): ?>
+<?= $this->partial($provider->getListFormPartial(), $vars) ?>
+<?php endif ?>
+
+<?php if($adminCoreService->isAllowed($resource, 'add')) { ?>
+<p class="m-b-20 clearfix"><a class="btn btn-success newBtn" href="<?= $this->url($addRoute, [], ['query' => ['page' => $page]]); ?>"><i class="glyphicon glyphicon-plus"></i> Nuevo</a></p>
+<?php } ?>
+
+<?= $this->partial($tablePartial, $vars) ?>
+
+<?= $this->partial('adminauth2/list_pagination', $vars) ?>

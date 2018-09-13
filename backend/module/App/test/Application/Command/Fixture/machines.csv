@@ -1,0 +1,47 @@
+entity_id,name,serial,image,sort_order,creation_time,update_time,is_active,type
+1,Piccolo,90319ea56263c86d6dbade1b0f34fab6,cms/mymachine/0/1/01_piccolo1_smalln.png,40,,2015-10-27 08:40:30,1,manual
+2,Genio,acd113387a1fead81b84ffc885aeff47,cms/mymachine/u/n/unbranded-genio-sequence-red-nescafe-dolce-gusto-view-1_1_1_2.jpg,80,2012-11-14 09:19:45,2018-01-18 18:46:49,1,auto
+3,Piccolo 3,87ced04f1925241b26c18f0089932df2,cms/mymachine/0/1/01_piccolo3_small.gif,0,2012-11-14 09:21:11,2015-02-02 13:51:44,2,manual
+4,Fontana,b1233b4654bae701b1993a56c4494636,cms/mymachine/0/2/02_fontana1_smalln.png,50,2012-11-14 09:21:48,2015-02-16 16:11:45,2,manual
+5,Melody I,9c869e4973577b24cbfd3d40afb07a0a,cms/mymachine/0/3/03_melody1_smalln_1.png,10,2012-11-14 09:22:18,2015-02-16 16:11:14,2,manual
+6,Melody II,4965f8d4ed2091ac8c42418b3f70f8ea,cms/mymachine/0/3/03_melody2_smalln.png,20,2012-11-14 09:22:52,2017-11-27 18:27:52,2,manual
+7,Creativa,aa1107332d942cedafb93f803e4c7d1f,cms/mymachine/0/3/03_melody3_small.png,40,2012-11-14 09:23:19,2015-02-16 16:03:32,2,auto
+8,Melody III,2fe44a0c9f659e0ef6662a771f448eff,cms/mymachine/u/n/unbranded-melody-3-automatic-red-metal-nescafe-dolce-gusto-view-1_1_1_1_.jpg,60,2012-11-14 09:23:56,2018-03-16 15:31:48,1,manual
+9,Melody 5,cffb8da6de3da97f811db4db2e900d37,cms/mymachine/0/5/05_melody3_1_small.gif,90,2012-11-14 09:24:35,2015-02-17 09:08:27,2,manual
+10,Melody 6,0560405ba95b8f17826b0db963c23ffc,cms/mymachine/0/5/05_melody3_2_small.gif,100,2012-11-14 09:25:07,2015-02-02 13:52:33,2,manual
+11,Premium,a288195832f8717bca4671416014a464,cms/mymachine/0/3/03_model3_small.gif,110,2012-11-14 09:25:43,2015-02-02 13:52:41,2,manual
+12,Edition limitée,b159121bcb7ba470cf1c604bc1c5eb56,cms/mymachine/p/o/pop_melody2.png,120,2012-11-14 09:26:11,2015-02-02 13:52:48,2,manual
+13,Circolo,48116d7d431ebcb3f2223a88c5f39e01,cms/mymachine/o/b/oblo_gris.jpg,30,2012-11-14 09:26:44,2017-11-27 18:28:18,2,manual
+14,Circolo II,cb11ec83ccc2ea83f157b1aae19adf4a,cms/mymachine/0/4/04_circolo2_small.gif,140,2012-11-14 09:27:16,2015-02-02 13:53:04,2,auto
+15,Circolo,48116d7d431ebcb3f2223a88c5f39e01,cms/mymachine/c/i/circolo_auto_smalln.png,90,2013-08-19 15:38:54,2015-02-16 16:02:55,2,auto
+16,Genio,acd113387a1fead81b84ffc885aeff47,cms/mymachine/0/1/01_piccolo2_small_1.png,30,2013-08-19 15:41:15,2015-02-02 13:53:16,2,auto
+17,Melody III,2fe44a0c9f659e0ef6662a771f448eff,cms/mymachine/m/e/melody_3_red.png,70,2013-08-19 15:42:10,2018-01-08 19:33:24,1,auto
+18,Genio Fiorucci,f4b8fdb2ace1afdb4d1d5957046ec889,cms/mymachine/f/i/fiorucci_manual.png,20,2013-09-04 12:20:42,2015-02-16 16:04:28,2,auto
+19,Genio 2 Gris Titanio,acd113387a1fead81b84ffc885aeff47,cms/mymachine/g/e/genio_auto_80x80.png,10,2013-09-06 10:00:11,2017-01-12 15:09:00,1,auto
+20,Circolo,48116d7d431ebcb3f2223a88c5f39e01,cms/mymachine/c/i/circolo_auto_80x80_1.png,20,2013-09-06 10:01:00,2015-02-16 16:03:10,2,auto
+21,Genio 2 Roja Metal,a70a45911c914a8cf742c176ba82fa83,cms/mymachine/g/e/genio_register.png,10,2013-09-17 12:54:33,2017-01-12 15:09:48,1,auto
+22,Melody 3 FS CO,5f969101ba1e3349224777633e6f96d6,cms/mymachine/m/e/melody_register.png,20,2013-09-17 12:56:06,2014-12-18 20:20:20,2,auto
+23,Melody 3 FS CO,5f969101ba1e3349224777633e6f96d6,cms/mymachine/m/e/melody_ar.jpg,20,2013-10-17 23:34:44,2014-12-18 20:20:20,2,auto
+24,Genio,acd113387a1fead81b84ffc885aeff47,cms/mymachine/g/e/genio_ar.jpg,10,2013-10-17 23:34:44,2015-02-17 09:25:23,2,auto
+26,Mini Me,1a242da32316b0f62e406a95e7db2de9,cms/mymachine/u/n/unbranded-minime-piano-black-nescafe-dolce-gusto-view-3_2.jpg,100,2014-04-15 10:51:18,2018-03-16 15:31:34,1,auto
+27,Genio ,acd113387a1fead81b84ffc885aeff47,cms/mymachine/8/0/80x80_1.png,50,2015-02-17 09:27:53,2018-01-29 19:44:13,1,auto
+28,Jovia,acd113387a1fead81b84ffc885aeff50,cms/mymachine/f/l/flyout_jovia_white.jpg,20,2015-04-23 07:04:22,2015-11-25 05:57:22,1,manual
+29,Oblo,b9dd7da4a302523d641d5f1275692fa8,cms/mymachine/o/b/oblo-text.png,0,2015-10-27 09:42:41,2015-10-27 09:42:41,1,manual
+30,Drop White,drop-001,cms/mymachine/r/s/rsz_krups-drop-glossy_white-machine-view-1_1_3.jpg,80,2015-11-25 05:49:35,2016-10-29 10:02:50,1,auto
+31,Oblo black,oblo-001,cms/mymachine/r/s/rsz_krups-oblo-piano-black-nescafe-dolce-gusto-view-3_1.jpg,10,2015-11-25 05:56:54,2015-11-25 06:13:58,1,manual
+32,Mini Me Black,1a242da32316b0f62e406a95e7db2de9,cms/mymachine/m/i/minime-negra_1.png,60,2016-04-15 13:53:35,2016-04-15 13:56:30,1,auto
+33,Mini Me Black And White,1a242da32316b0f62e406a95e7db2de9,cms/mymachine/m/i/mini-me-blanca_4.png,80,2016-04-15 13:57:39,2016-04-15 13:57:44,1,auto
+34,DROP DARK SILVER,7501000913497,cms/mymachine/d/r/drop-darksilver_1.png,110,2016-11-02 22:02:11,2017-08-02 10:46:44,1,auto
+35,Drop Dark Silver,7070159900461500001203D,cms/mymachine/d/r/drop-dark-silver.png,90,2016-11-29 22:01:23,2016-11-29 22:17:18,1,auto
+36,Genius 2 Limited Edition MINI®,27070162300251500000953D,cms/mymachine/g/e/genio2-mini-limited-edition.png,100,2016-11-29 22:18:49,2016-11-29 22:18:49,1,auto
+37,Eclipse,7501000913999,cms/mymachine/e/c/eclipse.png,120,2017-08-02 10:49:02,2017-08-02 10:49:02,1,auto
+38,Drop Automatic Red,Drop Red 1,cms/mymachine/d/o/dolce_red3.png,0,2017-08-21 09:28:12,2018-03-16 15:30:49,1,auto
+39,Mini Me Automatic Anthracite,Mini Me ,cms/mymachine/m/i/minime_2.png,0,2017-08-21 09:29:18,2017-08-21 09:29:18,1,auto
+40,Stelia Black,stelia-001,cms/mymachine/s/t/stelia_unbrand_75x80.png,120,2017-10-19 21:07:43,2017-11-27 22:02:11,1,auto
+41,Lumio,lumio-001,cms/mymachine/i/m/imagen_menu_mobile.png,130,2017-11-27 18:26:50,2017-11-27 20:34:29,1,auto
+42,Colors,colors-001,cms/mymachine/m/i/mini_80x80.png,140,2017-12-14 14:32:36,2017-12-14 14:32:36,1,auto
+43,MELODY,MELODY-0001,cms/mymachine/u/n/unbranded-melody-3-automatic-red-metal-nescafe-dolce-gusto-view-1_1_1.jpg,80,2018-01-18 19:47:09,2018-01-18 19:47:22,1,auto
+44,Mini Me,minime-001,cms/mymachine/8/0/80x80.png,150,2018-01-23 16:25:39,2018-01-23 16:25:39,1,auto
+45,MiniMe,010203040506,cms/mymachine/m/i/minime_3_2.png,0,2018-03-20 21:33:07,2018-03-20 21:39:35,1,auto
+46,Máquina NESCAFÉ® Dolce Gusto® COLORS ™ Blanca,0101010101010125hdhhgdfgd,cms/mymachine/m/a/maquinablancanueva_1.png,0,2018-04-13 13:32:53,2018-04-13 14:35:23,1,auto
+47,Máquina NESCAFÉ® Dolce Gusto® COLORS ™ Negra,02358478965kkjhhfdyyrt154,cms/mymachine/m/a/maquinanegranueva.png,0,2018-04-13 14:34:32,2018-04-13 15:01:03,1,auto

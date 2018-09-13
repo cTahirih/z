@@ -1,0 +1,15 @@
+<?php
+foreach ($adminCoreService->getMenus() as $id => $menu) {
+    // Setup Partial
+    if (isset($menu['partial'])) {
+        $partial = $menu['partial'];
+    } else {
+        if (isset($menu['children'])) {
+            $partial = 'adminauth2/menu_with_children';
+        } else {
+            $partial = 'adminauth2/menu_single';
+        }
+    }
+    
+    echo $this->partial($partial, compact('adminCoreService', 'id', 'menu'));
+}

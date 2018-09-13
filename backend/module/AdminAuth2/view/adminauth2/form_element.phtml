@@ -1,0 +1,10 @@
+<?php
+use Zend\Form\Element\Hidden;
+$attributes = $element->getAttributes();
+?>
+<?php if ($element instanceOf Hidden): ?>
+    <?= $this->formElement($element) ?>
+<?php else: ?>
+    <?= $this->formElement($element) ?><br />
+    <?= $this->formElementErrors($element, ['class' => 'form-element-error']) ?>
+<?php endif ?>

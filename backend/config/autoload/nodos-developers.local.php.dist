@@ -1,0 +1,21 @@
+<?php
+/**
+ * Nodos Developers Configuration Override
+ *
+ * For Development only, DO NOT USE IN PRODUCTION!
+ *
+ * INSTRUCTIONS:
+ *
+ * Copy this file without the ".dist" suffix and populate values as needed.
+ *
+ * READ THIS CAREFULLY:
+ *
+ * - The ".dist" file is part of the Git repository. DO NOT EDIT IT.
+ * - The file you'll copy (sans the ".dist" suffix) is by default ignored
+ *   by Git via .gitignore. This is a good practice as it prevents sensitive
+ *   credentials from being accidentally commited to the repository.
+ */
+
+return [
+    'show_backend_template' => false,
+];

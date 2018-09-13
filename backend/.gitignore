@@ -1,0 +1,6 @@
+composer.phar
+config/autoload/*local.php
+config/autoload/database.php
+config/development.config.php
+data/
+vendor/

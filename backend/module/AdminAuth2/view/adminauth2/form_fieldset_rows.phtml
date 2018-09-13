@@ -1,0 +1,37 @@
+<?php
+use Zend\Form\Element\Hidden;
+
+extract($commonVariables);
+
+foreach($fieldset as $element):
+?>
+    <?php
+    // For a Collection, call the collection partial
+    if ($element instanceof \Zend\Form\Element\Collection):
+    ?>
+        <?= $this->partial($formCollection, ['collection' => $element, 'commonVariables' => $commonVariables]) ?>
+        
+    <?php
+    // For a Fieldset, add its elements as if they are part of the parent Form.
+    elseif ($element instanceof \Zend\Form\Fieldset):
+    ?>
+        <?= $this->partial($formFieldsetRows, ['fieldset' => $element, 'commonVariables' => $commonVariables]) ?>
+    
+    <?php
+    // For everything else (i.e. a plain Element), just render it.
+    else:
+        // Hiddens are rendered without a table row
+        if ($element instanceOf Hidden):
+    ?>
+            <?= $this->partial($formElement, compact('element', 'commonVariables')) ?>
+        <?php else: ?>
+            <tr><td width="20%" align="right">
+                <?= $element->getLabel() ?>
+            </td><td valign="top">
+                <?= $this->partial($formElement, compact('element', 'commonVariables')) ?>
+            </td></tr>
+    <?php
+        endif;
+    endif;
+    ?>
+<?php endforeach ?>

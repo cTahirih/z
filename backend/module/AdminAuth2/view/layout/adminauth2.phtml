@@ -1,0 +1,243 @@
+<?php
+if (!isset($title)) {
+    $title = 'Admin';
+} else {
+    $title = $title . ' - Admin';
+}
+?>
+<?= $this->doctype() ?>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?php
+    echo $this->headTitle($title);
+    echo "\n";
+    
+    echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
+    echo "\n";
+    
+    $this->headLink([
+        'rel' => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath() . '/cms/img/favicon.ico',
+    ]);
+    
+    $styles = [
+        '/assets/css/style.css',
+        '/pages/css/pages.css',
+        '/pages/css/pages-icons.css',
+        '/assets/plugins/switchery/css/switchery.min.css',
+        '/assets/plugins/bootstrap-select2/select2.css',
+        '/assets/plugins/jquery-scrollbar/jquery.scrollbar.css',
+        '/assets/plugins/font-awesome/css/font-awesome.css',
+        '/assets/plugins/boostrapv3/css/bootstrap.min.css',
+        '/assets/plugins/pace/pace-theme-flash.css',
+        '/cms/js/fancybox/jquery.fancybox.css',
+    ];
+    
+    foreach ($styles as $style) {
+        $this->headLink()->prependStylesheet($this->basePath($style));
+    }
+    
+    echo $this->headLink();
+    echo "\n";
+    
+    $files = [
+        '/assets/js/tables.js',
+        '/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js',
+        '/assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js',
+        '/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        '/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js',
+        '/assets/plugins/jquery/jquery-easy.js',
+        '/assets/plugins/jquery-unveil/jquery.unveil.min.js',
+        '/assets/plugins/jquery-bez/jquery.bez.min.js',
+        '/assets/plugins/jquery-ios-list/jquery.ioslist.min.js',
+        '/assets/plugins/imagesloaded/imagesloaded.pkgd.min.js',
+        '/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js',
+        '/assets/plugins/jquery-actual/jquery.actual.min.js',
+        '/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js',
+        '/assets/plugins/bootstrap-select2/select2.min.js',
+        '/assets/plugins/classie/classie.js',
+        '/assets/plugins/switchery/js/switchery.min.js',
+        '/assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js',
+        '/assets/plugins/datatables-responsive/js/datatables.responsive.js',
+        '/assets/plugins/datatables-responsive/js/lodash.min.js',
+        '/cms/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js',
+        '/cms/js/fancybox/jquery.fancybox.js',
+        '/cms/ckeditor/ckeditor.js',
+        '/assets/js/scripts.js',
+        '/assets/plugins/pace/pace.min.js',
+        '/assets/plugins/boostrapv3/js/bootstrap.min.js',
+        '/assets/plugins/modernizr.custom.js',
+        '/assets/plugins/jquery-ui/jquery-ui.min.js',
+        '/assets/plugins/jquery/jquery-1.11.1.min.js',
+    ];
+    
+    foreach ($files as $file) {
+        $this->headScript()->prependFile($this->basePath($file));
+    }
+    
+    $this->headScript()
+        ->prependFile($this->basePath('/cms/js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+        ->prependFile($this->basePath('/cms/js/html5shiv.js'), 'text/javascript', array('conditional' => 'lt IE 9'));
+    
+    echo $this->headScript();
+    echo "\n";
+    ?>
+</head>
+
+<body class="fixed-header">
+    <nav class="page-sidebar" data-pages="sidebar">
+        <!-- !BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
+        <div class="sidebar-overlay-slide from-top" id="appMenu"></div>
+        <!-- !END SIDEBAR MENU TOP TRAY CONTENT-->
+
+        <!-- !BEGIN SIDEBAR MENU HEADER-->
+        <div class="sidebar-header">
+            <img src="/assets/img/logo_nodos-big.png" alt="logo" class="brand" data-src="/assets/img/logo_nodos-big.png" data-src-retina="/assets/img/logo_nodos-big.png" height="28">
+            <div class="sidebar-header-controls">
+                <button type="button" class="btn btn-link visible-lg-inline  m-l-50" data-toggle-pin="sidebar" id="btn-open-sidebar"><i class="fa fs-12"></i></button>
+            </div>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul class="menu-items" id="menu-sidebar">
+                <li class="m-t-20">
+                    <?= $this->partial('adminauth2/menu_entry', [
+                        'url' => $this->url('admin/dashboard'),
+                        'title' => 'Dashboard',
+                        'description' => 'Página de inicio',
+                        'iconClass' => 'pg-home',
+                        'selected' => $adminCoreService->isCurrentMenu('dashboard'),
+                    ]) ?>
+                </li>
+                
+                <?= $this->partial("adminauth2/menu_handler", compact('adminCoreService', 'provider')) ?>
+                
+                <li>
+                    <?= $this->partial('adminauth2/menu_entry', [
+                        'url' => $this->url('admin/logout'),
+                        'title' => 'Salir',
+                        'description' => 'Cerrar sesión',
+                        'iconClass' => 'fa fa-power-off',
+                    ]) ?>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        <div class="header ">
+            <!-- START MOBILE CONTROLS -->
+            <div class="container-fluid relative">
+                <!-- LEFT SIDE -->
+                <div class="pull-left full-height visible-sm visible-xs">
+                    <!-- START ACTION BAR -->
+                    <div class="header-inner">
+                        <a href="#" class="btn-link toggle-sidebar visible-sm-inline-block visible-xs-inline-block padding-5" data-toggle="sidebar">
+                            <span class="icon-set menu-hambuger"></span>
+                        </a>
+                    </div>
+                    <!-- END ACTION BAR -->
+                </div>
+                <div class="pull-center hidden-md hidden-lg">
+                    <div class="header-inner">
+                        <div class="brand inline">
+                            <img src="/assets/img/logo_nodos-full.png" alt="logo" data-src="/assets/img/logo_nodos-full.png" data-src-retina="/assets/img/logo_nodos-full.png"  height="22">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MOBILE CONTROLS -->
+
+
+            <div class=" pull-left sm-table hidden-xs hidden-sm">
+                <div class="header-inner">
+                    <div class="brand inline">
+                        <img src="/assets/img/logo_nodos-full.png" alt="logo_nodos-full" data-src="/assets/img/logo_nodos-full.png" data-src-retina="/assets/img/logo_nodos-full.png" height="22">
+                    </div>
+
+                    <?php if (is_null($adminCoreService->getWebsiteRoute()) == false): ?>
+                    <a href="<?= $this->url($adminCoreService->getWebsiteRoute()) ?>" class="search-link" target="_blank"><i class="pg-map"></i>Visitar el <span class="bold">sitio web</span></a>
+                    <?php endif ?>
+                </div>
+            </div>
+            <div class=" pull-right">
+                <!-- START User Info-->
+                <div class="visible-lg visible-md m-t-10">
+                    <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+
+                        Bienvenido <span class="bold"><?= $adminCoreService->getUser()->getUsername() ?></span>
+                    </div>
+                </div>
+                <!-- END User Info-->
+            </div>
+        </div>
+        <!-- END HEADER -->
+            
+        <!-- START PAGE CONTENT WRAPPER -->
+        <div class="page-content-wrapper ">
+            <!-- START PAGE CONTENT -->
+            <div class="content container-fluid">
+                <div style="padding: 2em;">
+
+<?= $this->content ?>
+
+                </div>
+            </div>
+        </div>
+        
+        <hr>
+        
+        <footer>
+            <center>
+            Desarrollado por Nodos
+            </center>
+        </footer>
+    </div>
+        
+    <script src="<?= $this->basePath('/cms/js/bootstrap-datepicker.js') ?>"></script>
+    <script>
+        $(document).ready(function() {
+             $('.picker').datepicker()
+                .on('changeDate', function(ev){
+                    $('.picker').datepicker('hide');
+            });
+            
+            $(".img-tooltip").tooltip();
+            
+            $('.image').each(function(i) {
+                var img = $(this).nextAll('.img-tooltip');
+                img.attr('data-original-title',$(this).attr('data-size'));
+            });
+            
+            $(".fancybox").fancybox({
+                helpers: {
+                   overlay: {
+                       locked: false
+                   }
+                }
+            });
+            
+            $('.background_color').colorpicker();
+        });
+        
+        if($('.wysiwyg').length > 0) {
+            $('.wysiwyg').each(function() {
+                CKEDITOR.replace(this.id, {
+                    toolbar: [
+                        {name: 'document', items: ['Source']},
+                        {name: 'clipboard', items: ['Paste', 'PasteText', 'PasteFromWord']},
+                        {name: 'basicstyles', items: ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList','Indent','Outdent']},
+                        {name: 'links', items: ['Link']},
+                        {name: 'insert', items: ['SpecialChar']}
+                    ]
+                });  
+            });
+        }
+    </script>
+    <script src="/pages/js/pages.js" type="text/javascript"></script>
+</body>
+</html>

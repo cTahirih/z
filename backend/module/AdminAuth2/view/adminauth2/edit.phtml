@@ -1,0 +1,6 @@
+<?php include('add_edit_common_variables.php') ?>
+<a class="btn btn-primary" href="<?= $this->url($provider->getRoute(), [], $routeOptions) ?>">Regresar</a>
+
+<h1><?= $provider->getName(); ?> - Editar ID <?= $id ?></h1>
+
+<?= $this->partial($addEditForm, compact('form', 'commonVariables')) ?>

@@ -1,0 +1,15 @@
+<?php
+/**
+ * Development Mode Configuration Override
+ *
+ * IMPORTANT: DO NOT EDIT, COPY OR DELETE THIS FILE.
+ *
+ * AGAIN: YOU ARE NOT SUPPOSED TO COPY THIS FILE WITHOUT THE .DIST SUFFIX.
+ * DO NOT MANIPULATE IN ANY WAY.
+ *
+ * IMPORTANT: This file is part of the repository. Do not include passwords,
+ * keys, credentials or any other sensitive information.
+ */
+
+return [
+];

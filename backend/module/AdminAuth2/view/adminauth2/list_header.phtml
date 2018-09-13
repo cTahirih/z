@@ -1,0 +1,45 @@
+<?php
+use AdminAuth2\Provider\ListHeader;
+
+if (is_string($header)) {
+    echo $header;
+    return;
+}
+
+if ($header instanceof ListHeader) {
+    $sortField     = $provider->getListSortField();
+    $sortDirection = $provider->getListSortDirection();
+    $isSelected    = $header->getSlug() === $sortField;
+    
+    $title = $header->getTitle();
+    $class = ($isSelected  ? 'list-header-selected' : '');
+    
+    // If it's sortable, create a link
+    if ($header->isSortable()) {
+        // Setup direction. Default is `asc`, but on the current field invert
+        // the direction so clicking on the link sorts inversely.
+        $arrow     = 'down';
+        $direction = 'asc';
+        if ($isSelected && $sortDirection != 'desc') {
+            $arrow     = 'up';
+            $direction = 'desc';
+        }
+        
+        $routeOptions['query']['sort'] = $header->getSlug();
+        $routeOptions['query']['sort-direction'] = $direction;
+        
+        $title = sprintf('<a href="%s">%s</a>',
+            $this->url($provider->getRoute(), [], $routeOptions),
+            $header->getTitle()
+        );
+    }
+    
+    echo sprintf('<span class="list-header %s">%s</span>',
+        $class,
+        $title
+    );
+    
+    if ($isSelected && $header->isSortable()) {
+        echo sprintf('&nbsp;<i class="fa fa-arrow-circle-%s list-header-selected"></i>', $arrow);
+    }
+}

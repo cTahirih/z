@@ -1,0 +1,37 @@
+extend ../../_layout
+
+prepend html
+  - custom.title = 'Home';
+  - custom.body_cls = 'body--home';
+
+block main
+  .box-login.d-flex.align-items-center
+    .card
+      .card-body
+        .col.d-flex.justify-content-center.my-3
+          img(src!=config.static_url('images/logologin.png'))
+        form(id="dolce-login", name="dolce-login", method="POST", autocomplete="off").px-5
+          +csrf_token('csrf')
+          .form-group.mb-2
+            label.m-0.color-brown
+              | Usuario:
+            - config_user_name = {};
+            - config_user_name.name = 'username';
+            - config_user_name.attrClass = 'form-control login';
+            +input_text(config_user_name)
+          .form-group
+            label.m-0.color-brown
+              | Contraseña:
+            - config_user_password = {};
+            - config_user_password.name = 'password';
+            - config_user_password.attrClass = 'form-control login';
+            +input_password(config_user_password)
+          small.form-text.text-muted
+            <?php if ($invalidLogin): ?>
+              | Nombre de Usuario o Contraseña inválido
+            <?php endif ?>
+          .text-center.pt-3.pb-4
+            button.btn.button-sky.col-12(type="submit")
+              | Ingresar
+
+

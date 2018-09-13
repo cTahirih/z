@@ -1,0 +1,17 @@
+<?php $id = $row->getId() ?>
+
+<tr>
+    <?php foreach ($row->getItems() as $providerField): ?>
+    <td>
+      <?= $this->partial('adminauth2/view_value', compact('providerField')) ?>
+    </td>
+    <?php endforeach ?>
+    
+    <td align="center">
+        <?php
+        $vars       = $this->viewModel()->getCurrent()->getVariables();
+        $vars['id'] = $id;
+        echo $this->partial($buttonsPartial, $vars);
+        ?>       
+    </td>
+</tr>

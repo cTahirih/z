@@ -1,0 +1,1 @@
+{"version":3,"sources":["home.js"],"names":["console","log"],"mappings":";AAAAA,QAAQC,IAAI","file":"home.map","sourceRoot":"..\\..\\..\\..\\frontend\\static\\scripts","sourcesContent":["console.log('Print home !');\r\n"]}

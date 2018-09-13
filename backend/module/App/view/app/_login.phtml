@@ -1,0 +1,29 @@
+<h1>Login</h1>
+
+
+<?= $this->form()->openTag($form->prepare()) ?>
+
+Nombre de Usuario<br />
+<?= $this->formElement($form->get('username')) ?><br />
+<?= $this->formError($form->get('username')) ?>
+<br />
+<br />
+
+Contraseña<br />
+<?= $this->formElement($form->get('password')) ?><br />
+<?= $this->formError($form->get('password')) ?>
+<br />
+<br />
+
+<?php if ($invalidLogin): ?>
+Nombre de Usuario o Contraseña inválido<br />
+<br />
+<?php endif ?>
+
+<?= $this->formElement($form->get('csrf')) ?><br />
+<?= $this->formError($form->get('csrf')) ?>
+<br />
+<br />
+
+<input type="submit">
+</form>

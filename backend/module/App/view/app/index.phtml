@@ -1,0 +1,266 @@
+<!DOCTYPE html><!--[if lt IE 7]><html id="html" class="no-js lt-ie9 lt-ie8 lt-ie7" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 7]><html id="html" class="no-js ie7 lt-ie9 lt-ie8" lang='es' xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 8]><html id="html" class="no-js ie8 lt-ie9" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<!--[if IE 9]><html id="html" class="no-js ie9 lt-ie10" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
+<html id="html" lang="es">
+  <!--<![endif]-->
+  <head>
+    <title>Dolce Gusto</title>
+    <meta name="description">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta property="og:title" content="Dolce Gusto">
+    <meta property="og:description">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="">
+    <link rel="icon" type="image/png" href="<?= $this->basePath().'/site/favicon.ico';?>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"><!--[if gte IE 6 & lt IE 9]><script src!="<?php echo $this->basePath() ?>/site/scripts/libs/html5shiv.js"></script><![endif]-->
+<!--[if gte IE 6 & lt IE 9]><script src!="<?php echo $this->basePath() ?>/site/scripts/libs/selectivizr.js"></script><![endif]-->
+<!--[if lte IE 9]><script> window._ie = true; </script><![endif]-->
+    <link href="<?= $this->basePath().'/site/styles/main.css';?>" rel="stylesheet">
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', '', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+  </head>
+  <body class="body--home" id="body">
+    <main>
+      <nav class="navbar navbar-light py-0 my-3"><a class="navbar-brand font-weight-light" href="#"><img class="d-inline-block align-top pr-3" src="<?= $this->basePath().'/site/images/logo.png';?>">Plataforma KPIs</a><a class="btn bt-outline gotham-bold" href="/" role="button">Cerrar sesión</a></nav>
+      <main class="container-fluid" id="app">
+        <div class="row">
+          <div class="navleft col-2 p-0 mt-5">
+            <ul class="list-group mt-5 mb-5 text-center">
+              <li><a class="gotham-bold b-nav-tab list-group-item list-group-item-action firsttab d-flex align-items-center justify-content-center" @click="tab = 'first', filtertabCapsules = 'total', getDataCapsulesTotal()" href="#" :class="[tab == 'first' ? 'active' : '']">Cápsulas</a></li>
+              <li><a class="gotham-bold b-nav-tab list-group-item list-group-item-action d-flex align-items-center justify-content-center" href="#" @click="tab = 'second', filtertabClaims = 'total', getDataClaimsTotal()" :class="[tab == 'second' ? 'active' : '']">Canjes</a></li>
+              <li><a class="gotham-bold b-nav-tab list-group-item list-group-item-action d-flex align-items-center justify-content-center" href="#" @click="tab = 'third', filtertabMachines = 'total', getDataMachinesTotal()" :class="[tab == 'third' ? 'active' : '']">Máquinas</a></li>
+            </ul>
+          </div>
+          <div class="datadashboard col-10">
+            <div class="container-fluid px-0" v-cloak>
+              <div class="borderbox">
+                <div class="row mt-3"><span class="pt-2 px-3 d-flex align-items-center">Tipo de usuario:</span>
+                  <div class="nav col" v-if="tab == 'first'"><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabCapsules = 'total', getDataCapsulesTotal()" href="#" :class="[filtertabCapsules == 'total' ? 'active' : '']">Todos</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabCapsules = 'platino', urlDataCapsulesPlatinum()" href="#" :class="[filtertabCapsules == 'platino' ? 'active' : '']">Platino</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabCapsules = 'gold', urlDataCapsulesGold()" href="#" :class="[filtertabCapsules == 'gold' ? 'active' : '']">Oro</a></div>
+                  <div class="nav col" v-if="tab == 'second'"><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabClaims = 'total', getDataClaimsTotal()" href="#" :class="[filtertabClaims == 'total' ? 'active' : '']">Todos</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabClaims = 'platino', urlDataClaimsPlatinum()" href="#" :class="[filtertabClaims == 'platino' ? 'active' : '']">Platino</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabClaims = 'gold', urlDataClaimsGold()" href="#" :class="[filtertabClaims == 'gold' ? 'active' : '']">Oro</a></div>
+                  <div class="nav col" v-if="tab == 'third'"><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabMachines = 'total', getDataMachinesTotal()" href="#" :class="[filtertabMachines == 'total' ? 'active' : '']">Todos</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabMachines = 'platino', urlDataMachinesPlatinum()" href="#" :class="[filtertabMachines == 'platino' ? 'active' : '']">Platino</a><a class="b-nav-tab nav-link d-flex align-items-center text-xs navitem gotham-bold" @click="filtertabMachines = 'gold', urlDataMachinesGold()" href="#" :class="[filtertabMachines == 'gold' ? 'active' : '']">Oro</a></div>
+                  <div class="col-4 mb-2 text-right"><a class="btn bt-sky gotham-bold" :href="'/reports/capsules/capsules-quantity-by-month?start_month='+ start_date.month.value + '&amp;start_year=' + start_date.year + '&amp;end_month=' + end_date.month.value + '&amp;end_year=' + end_date.year + '&amp;export=1'" v-if="tab == 'first'" role="button"><i class="fas fa-download pr-1"></i>Descargar reporte</a><a class="btn bt-sky gotham-bold" :href="'/reports/claims/claims-quantity-by-month?start_month='+ start_date.month.value + '&amp;start_year=' + start_date.year + '&amp;end_month=' + end_date.month.value + '&amp;end_year=' + end_date.year + '&amp;export=1'" v-if="tab == 'second'" role="button"><i class="fas fa-download pr-1"></i>Descargar reporte</a><a class="btn bt-sky gotham-bold" :href="'/reports/machines/machines-quantity-by-month?start_month='+ start_date.month.value + '&amp;start_year=' + start_date.year + '&amp;end_month=' + end_date.month.value + '&amp;end_year=' + end_date.year + '&amp;export=1'" v-if="tab == 'third'" role="button"><i class="fas fa-download pr-1"></i>Descargar reporte</a></div>
+                </div>
+              </div>
+              <div class="col-5 mt-3 mb-2 float-right">
+                <div class="row">
+                  <div class="card">
+                    <div class="card-body">
+                      <p class="card-subtitle color-brown m-0 lineheigth">Periodo analizado</p>
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="form-group col-4 mb-0 d-flex align-items-center">
+                            <div class="container-monthpicker row"><i class="far fa-calendar-alt float-left pt-1 color-brown"></i>
+                              <input class="gotham-bold color-brown p-0 form-control monthpicker" type="text" placeholder="" v-model="start_date.month.month+ ' ' + start_date.year" @click="showCalendarStart = true, showCalendarEnd = false">
+                            </div>
+                            <div class="calendar" v-show="showCalendarStart" v-cloak>
+                              <div class="picker-container" id="monthpicker">
+                                <div class="row m-0 title-header">
+                                  <div class="col py-2">
+                                    <select class="title" name="year" v-model="start_date.year" id="yearpicker">
+                                      <option value="Año" selected disabled>Año</option>
+                                      <option value="2015">2015</option>
+                                      <option value="2016">2016</option>
+                                      <option value="2017">2017</option>
+                                      <option value="2018">2018</option>
+                                    </select>
+                                  </div><a class="float-right pr-1" href="#" @click="showCalendarStart = false"><i class="fas fa-times color-brown"></i></a>
+                                </div>
+                                <div class="body-picker">
+                                  <button class="elm-picker" v-for="elm in months" @click="start_date.month = elm, start_date.year != '' ? showCalendarStart = false : null" :class="[start_date.month == elm.value ? 'active' : '']">{{elm.month}}</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-1 d-flex align-items-center justify-content-center"><i class="fas fa-arrow-right color-icon"></i></div>
+                          <div class="form-group col-4 mb-0 d-flex align-items-center">
+                            <div class="container-monthpicker row"><i class="far fa-calendar-alt float-left pt-1 color-brown"></i>
+                              <input class="gotham-bold color-brown p-0 form-control monthpicker" type="text" placeholder="" v-model="end_date.month.month + ' ' + end_date.year " @click="showCalendarEnd = true, showCalendarStart = false">
+                            </div>
+                            <div class="calendar" v-show="showCalendarEnd" v-cloak>
+                              <div class="picker-container" id="monthpicker">
+                                <div class="row m-0 title-header">
+                                  <div class="col py-2">
+                                    <select class="title" name="year" v-model="end_date.year" id="yearpicker">
+                                      <option value="Año" selected disabled>Año</option>
+                                      <option value="2015">2015</option>
+                                      <option value="2016">2016</option>
+                                      <option value="2017">2017</option>
+                                      <option value="2018">2018</option>
+                                    </select>
+                                  </div><a class="float-right pr-1" href="#" @click="showCalendarEnd = false"><i class="fas fa-times color-brown"></i></a>
+                                </div>
+                                <div class="body-picker">
+                                  <button class="elm-picker" v-for="elm in months" @click="end_date.month = elm, end_date.year != '' ? showCalendarEnd = false : null" :class="[end_date.month == elm.value ? 'active' : '']">{{elm.month}}</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-2"><a class="btn bt-sky bt-calendar gotham-bold" @click="getDataCapsulesTotal()" href="#" v-if="tab == 'first' &amp;&amp; filtertabCapsules == 'total'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataCapsulesPlatinum()" href="#" v-if="tab == 'first' &amp;&amp; filtertabCapsules == 'platino'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataCapsulesGold()" href="#" v-if="tab == 'first' &amp;&amp; filtertabCapsules == 'gold'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="getDataClaimsTotal()" href="#" v-if="tab == 'second'  &amp;&amp; filtertabClaims == 'total'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataClaimsPlatinum()" href="#" v-if="tab == 'second' &amp;&amp; filtertabClaims == 'platino'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataClaimsGold()" href="#" v-if="tab == 'second' &amp;&amp; filtertabClaims == 'gold'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="getDataMachinesTotal()" href="#" v-if="tab == 'third' &amp;&amp; filtertabMachines == 'total'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataMachinesPlatinum()" href="#" v-if="tab == 'third' &amp;&amp; filtertabMachines == 'platino'">Listo</a><a class="btn bt-sky bt-calendar gotham-bold" @click="urlDataMachinesGold()" href="#" v-if="tab == 'third' &amp;&amp; filtertabMachines == 'gold'">Listo</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mt-1" v-show="filtertabCapsules !== 'total' &amp;&amp; tab == 'first'" v-cloak>
+                    <div class="card-body">
+                      <ul class="pl-2">
+                        <li class="color-brown card-subtitle lineheigth"><span class="font-weigth-bold gotham-bold">Cantidad total</span>  de unidades registradas:<span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabCapsules == 'platino'">{{capsules.platinum.quantityTotalByUser}} unidades</span><span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-else>{{capsules.gold.quantityTotalByUser}} unidades</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth"><span class="gotham-bold">Cantidad promedio</span> de unidades registradas por usuario:<span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabCapsules == 'platino'">{{capsules.platinum.averageByUser}} unidades</span><span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-else>{{capsules.gold.averageByUser}} unidades</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card mt-1" v-show="filtertabClaims !== 'total' &amp;&amp; tab == 'second'" v-cloak>
+                    <div class="card-body">
+                      <ul class="pl-2">
+                        <li class="color-brown card-subtitle lineheigth" v-if="claims.platinum.quantityTotalByUser &lt; 2"><span class="font-weigth-bold gotham-bold">Cantidad total</span>  de canjes realizados por usuario:<span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabClaims == 'platino'"> {{claims.platinum.quantityTotalByUser}} canje</span><span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-else> {{claims.gold.quantityTotalByUser}} canje</span></li>
+                        <li class="color-brown card-subtitle lineheigth" v-else><span class="font-weigth-bold gotham-bold">Cantidad total</span>  de canjes realizados por usuario:<span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabClaims == 'platino'"> {{claims.platinum.quantityTotalByUser}} canjes</span><span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-else> {{claims.gold.quantityTotalByUser}} canjes</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth"><span class="gotham-bold">Cantidad promedio</span> de canjes realizados por usuario:<span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabClaims == 'platino'"> {{claims.platinum.averageByUser}} canjes</span><span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-else> {{claims.gold.averageByUser}} canjes</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth"><span class="gotham-bold">Frecuencia promedio</span> de canjes por usuario:<span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabClaims == 'platino'">Cada {{claims.platinum.acquisitionAverage}} meses</span><span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-else>Cada {{claims.gold.acquisitionAverage}} meses</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card mt-1" v-show="filtertabMachines !== 'total' &amp;&amp; tab == 'third'" v-cloak>
+                    <div class="card-body">
+                      <ul class="pl-2">
+                        <li class="color-brown card-subtitle lineheigth" v-if="machines.platinum.quantityAverageByUser &lt; 2"><span class="font-weigth-bold gotham-bold">Cantidad</span>  promedio de máquinas por usuarios:<span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabMachines == 'platino'"> {{machines.platinum.quantityAverageByUser}} máquina</span><span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-else> {{machines.gold.quantityAverageByUser}} máquina</span></li>
+                        <li class="color-brown card-subtitle lineheigth" v-else><span class="font-weigth-bold gotham-bold">Cantidad</span>  promedio de máquinas por usuarios:<span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabMachines == 'platino'"> {{machines.platinum.quantityAverageByUser}} máquinas</span><span class="color-sky d-block gotham-bold lineheigth-md text-md mt-1" v-else> {{machines.gold.quantityAverageByUser}} máquinas</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth"><span class="gotham-bold">Mes de mayor registro</span><span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabMachines == 'platino'">{{machines.platinum.bestMonth.month}} {{machines.platinum.bestMonth.year}}</span><span class="color-pink d-block gotham-bold lineheigth-md text-md mt-1" v-else>{{machines.gold.bestMonth.month}} {{machines.gold.bestMonth.year}}</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth" v-if="machines.platinum.frecuencieaverage &lt; 2"><span class="gotham-bold">Frecuencia</span> promedio de registro de máquinas:<span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabMachines == 'platino'">Cada mes</span><span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-else>Cada mes</span></li>
+                        <li class="color-brown card-subtitle mt-4 lineheigth" v-else><span class="gotham-bold">Frecuencia</span> promedio de registro de máquinas:<span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-if="filtertabMachines == 'platino'">Cada {{machines.platinum.frecuencieaverage}} meses</span><span class="color-orange d-block gotham-bold lineheigth-md text-md mt-1" v-else>Cada {{machines.gold.frecuencieaverage}} meses</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="b-tab mt-3" v-if="tab == 'first'" :class="[tab == 'first' ? 'active' : '']">
+                <div class="b-tab" v-show="filtertabCapsules == 'total'" :class="[filtertabCapsules == 'total' ? 'active' : '']" id="alluser">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown m-0"><span class="gotham-bold">Cantidad total</span>  de unidades registradas por segmento:</h5>
+                        <div class="my-5">
+                          <canvas id="barChartCapsulas"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabCapsules == 'platino'" :class="[filtertabCapsules == 'platino' ? 'active' : '']" id="platinouser">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Unidades registradas</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartCapsulasPlatino"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabCapsules == 'gold'" :class="[filtertabCapsules == 'gold' ? 'active' : '']" id="golduser">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Unidades registradas</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartCapsulasGold"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="b-tab mt-3" v-if="tab == 'second'" :class="[tab == 'second' ? 'active' : '']">
+                <div class="b-tab" v-show="filtertabClaims == 'total'" :class="[filtertabClaims == 'total' ? 'active' : '']" id="platinoalluser">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown m-0"><span class="gotham-bold">Cantidad total</span>  de canjes registrados por segmento:</h5>
+                        <div class="my-5">
+                          <canvas id="barChartCanjes"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabClaims == 'platino'" :class="[filtertabClaims == 'platino' ? 'active' : '']" id="platinousercanjes">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Canjes realizados:</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartCanjesPlatino"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabClaims == 'gold'" :class="[filtertabClaims == 'gold' ? 'active' : '']" id="goldusercanjes">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Promedio de canjes realizados</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartCanjesGold"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="b-tab mt-3" v-if="tab == 'third'" :class="[tab == 'third' ? 'active' : '']">
+                <div class="b-tab" v-show="filtertabMachines == 'total'" :class="[filtertabMachines == 'total' ? 'active' : '']" id="allusermaq">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown m-0"><span class="gotham-bold">Cantidad total</span>  de máquinas registradas por segmento:</h5>
+                        <div class="my-5">
+                          <canvas id="barChartMaquinas"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabMachines == 'platino'" :class="[filtertabMachines == 'platino' ? 'active' : '']" id="platinousermaq">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Cantidad total de máquinas</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartMaquinasPlatino"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-tab" v-show="filtertabMachines == 'gold'" :class="[filtertabMachines == 'gold' ? 'active' : '']" id="goldusermaq">
+                  <div class="col-7 my-2 pl-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title color-brown gotham-bold m-0">Cantidad total de máquinas</h5>
+                        <div class="my-5">
+                          <canvas id="lineChartMaquinasGold"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </main>
+    <script src="<?= $this->basePath().'/site/scripts/home.js';?>" async></script>
+  </body>
+</html>

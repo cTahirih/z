@@ -1,0 +1,230 @@
+mixin csrf_token(name)
+  <?php $e=$form->get('#{name}'); ?>
+  <?php echo $this->formInput($e); ?>
+
+mixin input_text(config)
+  - name = config.name || ''
+  - placeholder = config.placeholder || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttribute('class','#{attrClass}'); ?>
+  <?php $e->setAttribute('placeholder','#{placeholder}'); ?>
+  <?php $e->setAttribute('data-rule-maxlength','#{maxlength}'); ?>
+  <?php $e->setAttribute('data-rule-minlength','#{minlength}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formInput($e);?>
+  //-.ElementForm-errorContent
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+mixin input_number(config)
+  - name = config.name || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - attrClass = config.attrClass || '';
+
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttribute('pattern','[0-9]*'); ?>
+  <?php $e->setAttribute('placeholder','#{placeholder}'); ?>
+  <?php $e->setAttribute('class','number #{attrClass}'); ?>
+  <?php $e->setAttribute('data-rule-maxlength','#{maxlength}'); ?>
+  <?php $e->setAttribute('data-rule-minlength','#{minlength}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formInput($e);?>
+  //-.ElementForm-errorContent
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+mixin input_date(config)  
+  - name = config.name || '';
+  - var_name = config.var_name || name;
+  - id = config.id || name;
+  - placeholder = config.placeholder || '';
+  - tabindex = config.tabindex || '';
+  - defaultValue = config.defaultValue || '';
+  - isDisabled = config.isDisabled || false;
+  - label = config.label || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - attrClass = 'ElementForm-input' + attrClass || 'ElementForm-input';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - minDate = config.minDate || '01/01/1920';
+  - maxDate = config.maxDate || false;
+
+  .ElementForm(class='ElementForm--' + camelCase(name.replace('_' , '-')))
+    .ElementForm-statement
+      if (label)
+        label(for!=id).ElementForm-label !{label}
+      <?php $e=$form->get('#{name}'); ?>
+      <?php $e->setAttributes(array('id' => '#{id}','placeholder'=>'#{placeholder}','tabIndex'=>'#{tabindex}','type'=>'text','class'=>'date #{attrClass}', 'required' => '#{required}', 'minlength' => '#{minlength}', 'maxlength' => '#{maxlength}', 'data-rule-mindate' => '#{minDate}', 'data-rule-maxdate' => '#{maxDate}' ));?>
+      <?php echo $this->formInput($e);?>
+    .ElementForm-errorContent
+      <?php echo $this->formError($e); ?>
+
+mixin input_password(config)
+  - name = config.name || ''
+  - placeholder = config.placeholder || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - equalTo = config.equalTo || '';
+
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttribute('class','#{attrClass}'); ?>
+  <?php $e->setAttribute('placeholder','#{placeholder}'); ?>
+  <?php $e->setAttribute('type','password'); ?>
+  <?php $e->setAttribute('data-rule-maxlength','#{maxlength}'); ?>
+  <?php $e->setAttribute('data-rule-minlength','#{minlength}'); ?>
+  <?php $e->setAttribute('data-reference-confirm','#{equalTo}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formInput($e);?>
+  //-.ElementForm-errorContent
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+mixin input_email(config)
+  - name = config.name || ''
+  - placeholder = config.placeholder || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - equalTo = config.equalTo || '';
+
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttribute('class','#{attrClass}'); ?>
+  <?php $e->setAttribute('placeholder','#{placeholder}'); ?>
+  <?php $e->setAttribute('type','email'); ?>
+  <?php $e->setAttribute('data-rule-maxlength','#{maxlength}'); ?>
+  <?php $e->setAttribute('data-rule-minlength','#{minlength}'); ?>
+  <?php $e->setAttribute('data-reference-confirm','#{equalTo}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formInput($e);?>
+  //-.ElementForm-errorContent
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+
+mixin select(config)
+  - name = config.name || '';
+  - required = config.required || false;
+  - defaultText = config.defaultText || '';
+  - attrClass = config.attrClass || '';
+  
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttributes(array('class'=>'#{attrClass}'));?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formSelect($e); ?>
+  
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+mixin captcha(config)
+  - name = config.name || ''
+  - placeholder = config.placeholder || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - equalTo = config.equalTo || '';
+
+  <?php $e=$form->get('#{name}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formCaptcha($e);?>
+  .label-errorContent
+    <?php echo $this->formError($e); ?>  
+
+mixin textarea(config)
+  - name = config.name || ''
+  - placeholder = config.placeholder || '';
+  - required = config.required || false;
+  - attrClass = config.attrClass || '';
+  - minlength = config.minlength || 0;
+  - maxlength = config.maxlength || 100;
+  - equalTo = config.equalTo || '';
+
+  <?php $e=$form->get('#{name}'); ?>
+  <?php $e->setAttribute('class','#{attrClass}'); ?>
+  <?php $e->setAttribute('placeholder','#{placeholder}'); ?>
+  <?php $e->setAttribute('data-rule-maxlength','#{maxlength}'); ?>
+  <?php $e->setAttribute('data-rule-minlength','#{minlength}'); ?>
+  <?php $e->setAttribute('data-reference-confirm','#{equalTo}'); ?>
+  if(required)
+    <?php $e->setAttribute('required','true'); ?>
+  <?php echo $this->formTextarea($e);?>
+  //-.ElementForm-errorContent
+  .label-errorContent
+    <?php echo $this->formError($e); ?>
+
+
+
+mixin checkbox(config)
+  - name = config.name || ''
+  - id = config.id || name
+  - tabindex = config.tabindex || ''
+  - label = config.label || ''
+  - link_text = config.link_text || ''
+  - link_href = config.link_href || ''
+  - required = config.required || false
+  - has_link = config.has_link || false
+  - attrClass = config.attrClass || ''
+  - attrClass = 'ElementForm-input' + attrClass || 'ElementForm-input'
+  .ElementForm(class='ElementForm--' + camelCase(name.replace('_' , '-')))
+    .ElementForm-statement
+      .ElementForm-contentCheckBox
+        .ElementForm-checkBoxIcon
+        <?php $e=$form->get('#{name}'); ?>        
+        <?php $e->setAttributes(array('tabIndex'=>'#{tabindex}', 'required' => #{required}, 'id' => '#{id}' ));?>
+        <?php echo $this->formElement($e); ?>
+      label(for!=id).ElementForm-label.ElementForm-label--checkbox  #{label}
+      if has_link
+        a(href!=config.link_href, target!="_blank") #{link_text}
+
+    .ElementForm-errorContent
+      <?php echo $this->formError($e); ?>
+
+mixin radiobox(config)
+  - name = config.name || ''
+  - id = config.id || name
+  - tabindex = config.tabindex || ''
+  - label = config.label || ''
+  - link_text = config.link_text || ''
+  - link_href = config.link_href || ''
+  - required = config.required || false
+  - has_link = config.has_link || false
+  - attrClass = config.attrClass || ''
+  - attrClass = 'ElementForm-input' + attrClass || 'ElementForm-input'
+  .ElementForm(class='ElementForm--' + camelCase(name.replace('_' , '-')))
+    .ElementForm-statement
+      .ElementForm-contentRadioBox
+        <?php $e=$form->get('#{name}'); ?>        
+        <?php $e->setAttributes(array('tabIndex'=>'#{tabindex}', 'required' => #{required} ));?>
+        <?php echo $this->formElement($e); ?>
+      label(for!=id).ElementForm-label.ElementForm-label--radiobox  #{label}
+      if has_link
+        a(href!="#{link_href}") #{link_text}
+
+    .ElementForm-errorContent
+      <?php echo $this->formError($e); ?>
+
+mixin button(config)
+  .ElementForm-statement(class=config.wrapperClss ? config.wrapperClss : '')
+    <?php echo $this->formRow($form->get('#{config.name}')); ?>
+
+- function camelCase(input) { 
+    - return input.toLowerCase().replace(/_(.)/g, function(match, group1) {
+      - return group1.toUpperCase();
+    - });
+- }

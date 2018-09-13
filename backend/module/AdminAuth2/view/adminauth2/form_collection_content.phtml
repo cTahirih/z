@@ -1,0 +1,36 @@
+<?php
+extract($commonVariables);
+
+// jQuery doesn't support `[ ]` characters in an selector name, which an
+// ZF2 element might contain. So we need to replace those.
+$collectionName = str_replace(['[', ']'], '_', $collection->getName());
+?>
+<div id="<?= $collectionName ?>_collection">
+    <?php foreach ($collection as $fieldset): ?>
+    <?= $this->partial($formCollectionTable, compact('collection', 'fieldset', 'commonVariables')) ?>
+    <?php endforeach ?>
+</div>
+
+<?php
+// Build the row template by creating an array of template elements
+$templateElements = [];
+foreach ($collection->getTargetElement() as $element) {
+    $templateElements[] = $collection->getTemplateElement()->get($element->getName());
+}
+
+// Now we render it using the same partial and capture it into the
+// postForm placeholder.
+$this->placeholder('postForm')->captureStart();
+?>
+<div id="<?= $collectionName ?>_template" style="display: none;">
+    <?= $this->partial($formCollectionTable, [
+        'collection' => $collection,
+        'fieldset' => $templateElements,
+        'commonVariables' => $commonVariables,
+    ]) ?>
+</div>
+<?php $this->placeholder('postForm')->captureEnd(); ?>
+
+<?php if ($collection->allowAdd()): ?>
+<a href="#" class="btn btn-warning" onClick="addCollectionRow('<?= $collectionName ?>_collection', '<?= $collectionName ?>_template'); return false;">Add</a>
+<?php endif ?>

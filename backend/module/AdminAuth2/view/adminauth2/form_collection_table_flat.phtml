@@ -1,0 +1,16 @@
+<?php
+extract($commonVariables);
+?>
+<table class="table table-hover dataTable no-footer">
+    <tr>
+    <?php foreach ($fieldset as $element): ?>
+    <td valign="top">
+        <?= $element->getLabel() ?>
+    </td><td valign="top">
+        <?= $this->partial($formElement, compact('element', 'commonVariables')) ?>
+    </td>
+    <?php endforeach ?>
+    <td valign="top">
+        <a href="#" class="btn btn-danger" onClick="removeCollectionRow(this.parentNode.parentNode.parentNode); return false;">Remove</a>
+    </td></tr>
+</table>

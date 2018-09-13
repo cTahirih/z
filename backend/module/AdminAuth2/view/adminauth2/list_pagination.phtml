@@ -1,0 +1,11 @@
+<?=
+$this->paginationControl(
+    $provider->getPaginator(),
+    'sliding',
+    'adminauth2/slide_paginator.phtml',
+    [
+        'route'        => $provider->getRoute(),
+        'routeOptions' => $routeOptions,
+    ]
+);
+?>

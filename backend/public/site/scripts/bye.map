@@ -1,0 +1,1 @@
+{"version":3,"sources":["bye.js"],"names":["console","log"],"mappings":";AAAAA,QAAQC,IAAI","file":"bye.map","sourceRoot":"..\\..\\..\\..\\frontend\\static\\scripts","sourcesContent":["console.log('bais');\r\n"]}

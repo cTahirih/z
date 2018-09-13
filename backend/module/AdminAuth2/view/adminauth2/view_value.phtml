@@ -1,0 +1,19 @@
+<?php
+$value = $providerField->getValue();
+
+switch(gettype($value)) {
+    case 'boolean':
+        echo $this->partial('adminauth2/view_value_boolean', compact('value'));
+        break;
+    
+    case 'object':
+        if ($value instanceof \DateTime) {
+            echo $value->format('d/m/Y H:i:s');
+        }
+        break;
+    
+    default:
+        echo $value;
+        break;
+}
+?>

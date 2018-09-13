@@ -1,0 +1,17 @@
+<?php
+extract($commonVariables);
+?>
+<?= $this->placeholder('preForm') ?>
+<?= $this->form()->openTag($form->prepare()) ?>
+<?php
+// Load proper partial
+if ($form instanceof \AdminAuth2\Form\TabbedFormInterface) {
+    $partial = $formParentTabbed;
+} else {
+    $partial = $formParentTable;
+}
+
+echo $this->partial($partial, compact('form', 'commonVariables'));
+?>
+</form>
+<?= $this->placeholder('postForm') ?>
